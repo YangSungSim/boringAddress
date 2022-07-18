@@ -7,8 +7,9 @@ services:
       - ./h2/:/opt/h2-data
     ports:
       - '1520:1521'
-    env_file:
-      - ./env/h2.env
+    environment:
+      H2_OPTIONS: -ifNotExists
+    restart: always
     networks:
       - test_network_02
   backend:
