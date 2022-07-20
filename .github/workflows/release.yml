@@ -44,17 +44,17 @@ jobs:
         run: |
           mkdir -p deploy
           cp Dockerrun.aws.json deploy/Dockerrun.aws.json # Elastic Beanstalk에서 Docker 실행 시 체크하는 설정 파일
-          cd deploy && zip -r deploy.zip .
+          cd deploy && zip -r deploy .
 
       # Runs a set of commands using the runners shell
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws_access_key: AKIAXS72UNNAZLWAAKW4
-          aws_secret_key: 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
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: boringaddress
           environment_name: Boringaddress-env
           version_label: ${{ github.sha }}
           version_description: ${{ github.event.head_commit.message }}
           region: ap-northeast-2
-          deployment_package: deploy.zip
+          deployment_package: deploy/deploy.zip
