@@ -51,8 +51,8 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws_access_key: ${{ secrets.secret.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.secret.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key: ${{ secrets.actions.secret.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.actions.secret.AWS_SECRET_ACCESS_KEY }}
           application_name: boringaddress
           environment_name: Boringaddress-env
           version_label: ${{ github.sha }}
