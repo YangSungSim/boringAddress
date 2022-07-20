@@ -115,6 +115,7 @@ public class AddressController {
 
     @GetMapping("/address")
     public String list(Model model) {
+        System.out.println("한글나와라");
         List<Address> addresses = addressService.findAddress();
         model.addAttribute("addresses", addresses);
         return "address/addressList";

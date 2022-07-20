@@ -2,7 +2,9 @@ package com.example.lazyaddress.repository;
 
 import com.example.lazyaddress.domain.Address;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class AddressRepository {
-
+   //initial jpql
     private final EntityManager em;
 
     public Address findOne(Long id) {
@@ -52,8 +54,10 @@ public class AddressRepository {
                 .setParameter("addressId", address.getId())
                 .executeUpdate();
 
-        System.out.println("updated row num:"+affectedRow);
         em.flush();
         em.close();
+        System.out.println("updated getName:"+address.getName());
+
+        System.out.println("updated row num:"+affectedRow);
     }
 }

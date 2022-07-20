@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "boringaddress",
+      "image": "promise6424/boringaddress",
+      "hostname": "boringaddress",
+      "essential": false,
+      "memory": 128
+    },
+  ]
+}
