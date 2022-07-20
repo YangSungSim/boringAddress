@@ -50,7 +50,7 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_access_key: AKIAXS72UNNAZLWAAKW4
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: boringaddress
           environment_name: Boringaddress-env
