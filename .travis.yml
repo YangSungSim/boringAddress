@@ -1,0 +1,24 @@
+sudo: required
+
+language: generic
+
+service:
+  - docker
+
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t promise6424/boringaddress_test -f ./build/libs/LazyAddress.Dockerfile .
+
+script:
+  # 테스트 코드 실행
+  - ./gradlew clean build -Pprofile=test && ./gradlew clean build -Pprofile=ci -x test && docker build --tag promise6424/boringaddress_test
+
+after_success:
+  # spring boot 이미지 build
+  - docker build -t boringaddress -f ./build/libs/LazyAddress.Dockerfile .
+
+  # docker hub에 로그인
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  # 빌드된 이미지들을 docker hub 에 추가하기
+  - docker push promise6424/boringaddress
