@@ -45,10 +45,7 @@ jobs:
           mkdir -p deploy
           cp Dockerrun.aws.json deploy/Dockerrun.aws.json # Elastic Beanstalk에서 Docker 실행 시 체크하는 설정 파일
           cd deploy && zip -r deploy .
-          
-      - name: ${{ secrets.TEST }}
-        run: |
-          echo ${{ secrets.TEST }}
+      
 
       # Runs a set of commands using the runners shell
       - name: Deploy to EB
