@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  h2:
+    container_name: h2
+    image: 'oscarfonts/h2:latest'
+    volumes:
+      - ./h2/:/opt/h2-data
+    ports:
+      - 1521:1521
+      - 8081:81
+    environment:
+      H2_OPTIONS: "-ifNotExists"
+      H2_INITDB_ROOT_USERNAME: sa
+      H2_INITDB_ROOT_PASSWORD:
+    restart: always
+    networks:
+      - test_network_02
+  backend:
+    build:
+      context: ./build/libs/
+      dockerfile: LazyAddress.Dockerfile
+    container_name: boringaddress
+    ports:
+      - 8080:8080
+    volumes:
+      - ./build/libs/:/app
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - h2
+    networks:
+      - test_network_02
+
+networks:
+  test_network_02:
