@@ -6,9 +6,12 @@ services:
     volumes:
       - ./h2/:/opt/h2-data
     ports:
-      - '1520:1521'
+      - 1521:1521
+      - 8081:81
     environment:
-      H2_OPTIONS: -ifNotExists
+      H2_OPTIONS: "-ifNotExists"
+      H2_INITDB_ROOT_USERNAME: sa
+      H2_INITDB_ROOT_PASSWORD:
     restart: always
     networks:
       - test_network_02
@@ -16,9 +19,9 @@ services:
     build:
       context: ./build/libs/
       dockerfile: LazyAddress.Dockerfile
-    container_name: lazyaddress_backend
+    container_name: boringaddress
     ports:
-      - '8081:8080'
+      - 8080:8080
     volumes:
       - ./build/libs/:/app
     env_file:
