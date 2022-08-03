@@ -23,4 +23,4 @@ public interface AddressJpaDataRepository extends JpaRepository<Address, Long> {
     @Query("update Address m set m.age = m.age + 1 where m.age >= :age")
     int bulkAgePlus(@Param("age") int age);
 
-}
+
